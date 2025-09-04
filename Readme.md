@@ -1,104 +1,85 @@
-# 🎙️ Full Stack Audio Transcription App
+Video to Text & SEO Metadata Generator API
 
-This project uses **FastAPI** (backend) and **React (Vite)** (frontend) to transcribe audio files into text using **OpenAI Whisper**.
+This project is a FastAPI application with a React frontend. It allows users to upload video files, transcribe them using the Whisper model, and generate SEO-friendly YouTube metadata (title, description, hashtags).
 
----
+🚀 Features
 
-## ⚙️ Backend Setup (FastAPI + Whisper)
+Upload video files (various formats supported)
 
-1. Go to backend folder:
-   ```bash
-   cd backend
-   ```
+Automatic transcription to text
 
-2. Create virtual environment (optional but recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate     # Linux/Mac
-   venv\Scripts\activate        # Windows
-   ```
+SEO-ready metadata generation:
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+Title (max 10 words)
 
-4. Make sure **FFmpeg** is installed and added to PATH.  
-   - Download: https://ffmpeg.org/download.html
-   - Example (Windows): place in `C:\ffmpeg\bin` and add to PATH.
+Description (short and natural, in English)
 
-5. Start backend:
-   ```bash
-   uvicorn main:app --reload
-   ```
+10 Hashtags
 
-   Backend runs at: `http://127.0.0.1:8000`
+🌟 Benefits
 
----
+Save time on manual transcription
 
-## 🎨 Frontend Setup (React + Vite)
+Instantly get SEO-optimized metadata for YouTube
 
-1. Go to frontend folder:
-   ```bash
-   cd forntend
-   ```
+Upload once, copy, and paste results directly into YouTube
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+🛠️ Technologies
 
-3. Start development server:
-   ```bash
-   npm run dev
-   ```
+Frontend: HTML, CSS, React (JavaScript)
 
-   Dev server runs at: `http://127.0.0.1:5173`
+Backend: Python (FastAPI, Whisper)
 
-4. Build production files:
-   ```bash
-   npm run build
-   ```
+Uvicorn (ASGI server)
 
-   This creates `dist/` folder.
+FFmpeg (video processing)
 
----
+⚡ Installation
+Prerequisites
 
-## 🌐 Running Full Project Together
+Python 3.7+
 
-1. Build React app:
-   ```bash
-   cd forntend
-   npm run build
-   ```
+Node.js
 
-2. Start FastAPI backend (serves React app and API):
-   ```bash
-   cd backend
-   uvicorn main:app --reload
-   ```
+FFmpeg (in PATH)
 
-3. Open in browser:
-   ```
-   http://127.0.0.1:8000
-   ```
+Clone the repository
+git clone https://github.com/yourusername/video-to-text-api.git
+cd video-to-text-api
 
-   - React frontend loads here  
-   - API endpoint available at: `http://127.0.0.1:8000/api/transcribe`
+Backend setup
+python -m venv venv
+source venv/bin/activate # On Windows use `venv\Scripts\activate`
+pip install fastapi uvicorn whisper
+uvicorn main:app --reload
 
----
+Frontend setup
+cd frontend
+npm install
+npm run dev
 
-## 📤 Example API Request
+📖 User Guide
 
-Send an audio file with cURL:
+Start the backend server with:
 
-```bash
-curl -X POST "http://127.0.0.1:8000/api/transcribe"   -F "file=@sample.wav"
-```
+uvicorn main:app --reload
 
-Response:
-```json
-{
-  "transcript": "Hello world, this is a transcription example."
-}
-```
+Start the frontend with:
+
+npm run dev
+
+Open your browser and go to the frontend URL (default: http://localhost:5173).
+
+Upload your video file using the upload form.
+
+Wait for processing. You will receive:
+
+The transcript of your video
+
+An SEO-friendly title (max 10 words)
+
+A short description in English
+
+10 hashtags for YouTube SEO
+
+Copy the results and paste them directly into your YouTube video settings.
