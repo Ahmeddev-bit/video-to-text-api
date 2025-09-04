@@ -3,10 +3,13 @@ import "./audio.css";
 
 const Audio = () => {
   const [file, setFile] = useState(null);
-  const [trans, setTrans] = useState("");
+  const [data, setdata] = useState("");
   const [error, setError] = useState("");
   const [load, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [title, settitle] = useState("");
+  const [descri, setdescri] = useState("");
+  const [hash, sethash] = useState("");
 
   const handleUpload = async () => {
     if (!file) {
@@ -30,7 +33,8 @@ const Audio = () => {
       }
 
       const data = await res.json();
-      setTrans(data.transcript);
+      setdata(data);
+      console.log(data);
       setError("");
     } catch (err) {
       setError(err.message);
@@ -43,14 +47,17 @@ const Audio = () => {
   return (
     <div className="container">
       <header className="header">
-        <h1>🎙️ Audio → Text 📝</h1>
-        <p>Upload an audio file and get instant transcription.</p>
+        <h1>Genrate from video</h1>
+        <p>
+          Upload an video file and get instant
+          transcription,title,Description,Hashtages for youtube
+        </p>
       </header>
 
       <div className="upload-section">
         <input
           type="file"
-          accept="audio/*"
+          accept="video/*"
           onChange={(e) => setFile(e.target.files[0])}
         />
         <button onClick={handleUpload} disabled={load}>
@@ -86,8 +93,7 @@ const Audio = () => {
       </div>
 
       {error && <div className="error">{error}</div>}
-
-      {trans && (
+      {data && (
         <div className="transcript-card">
           <div className="transcript-header">
             <h2>📝 Transcript</h2>
@@ -95,7 +101,7 @@ const Audio = () => {
             <button
               className="copy-btn"
               onClick={() => {
-                navigator.clipboard.writeText(trans);
+                navigator.clipboard.writeText(data.transcript);
                 setCopied(true);
                 setTimeout(() => setCopied(false), 2000);
               }}
@@ -103,7 +109,13 @@ const Audio = () => {
               📋 Copy
             </button>
           </div>
-          <p>{trans}</p>
+          <p>{data.transcript}</p>
+          <h2>📌 Title:</h2>
+          <p>{data.title}</p>
+          <h2>📝 Description:</h2>
+          <p>{data.description}</p>
+          <h2>🏷️ Hashtags:</h2>
+          <p>{data.hashtags}</p>
         </div>
       )}
     </div>
