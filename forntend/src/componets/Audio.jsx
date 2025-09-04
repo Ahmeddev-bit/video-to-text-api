@@ -7,9 +7,6 @@ const Audio = () => {
   const [error, setError] = useState("");
   const [load, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [title, settitle] = useState("");
-  const [descri, setdescri] = useState("");
-  const [hash, sethash] = useState("");
 
   const handleUpload = async () => {
     if (!file) {
